@@ -42,4 +42,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "coveralls", "~> 0.8"
   
   spec.add_development_dependency "pry", "~> 0.11"
+  
+  spec.add_development_dependency "openssl", "~> 2.1.2"
 end

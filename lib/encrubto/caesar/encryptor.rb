@@ -1,40 +1,44 @@
 module Encrubto::Caesar
-    class Encryptor 
+  class Encryptor 
     
-      ORIGINAL = 'abcdefghijklmnopqrstuvwxyz'
+    DOWNCASE = [*'a'..'z']
+    UPCASE = [*'A'..'Z']
+    SHIFT = 3
 
-      def encrypt(str, offset)
-        if str.is_a?(String) && offset.is_a?(Integer)
-          if 0 <= offset && offset <= 26
-            caesar = shift(offset)
-            str.tr("#{ ORIGINAL }#{ ORIGINAL.upcase }", "#{ caesar }#{ caesar.to_s.upcase }")
-          else
-            raise 'Offset must be between 0 and 26!'
-          end
+    def encrypt(plain_string)
+      raise(ArgumentError.new("Argument must be string.")) unless plain_string.is_a? String
+      plain_string.chars.map do |char|
+        if DOWNCASE.include?(char)
+          index = DOWNCASE.find_index(char)
+          shifted_index = (index + SHIFT) % DOWNCASE.length
+          DOWNCASE[shifted_index]
+        elsif UPCASE.include?(char)
+          index = UPCASE.find_index(char)
+          shifted_index = (index + SHIFT) % UPCASE.length
+          UPCASE[shifted_index]
         else
-          raise 'First param must be String, second param must be Integer!'
+          char
         end
-      end
-  
-      def decrypt(encrypted, offset)
-        if encrypted.is_a?(String) && offset.is_a?(Integer)
-          if 0 <= offset && offset <= 26
-            caesar = shift(offset)
-            encrypted.tr("#{ caesar }#{ caesar.to_s.upcase }", "#{ ORIGINAL }#{ ORIGINAL.upcase }")
-          else
-            raise 'Offset must be between 0 and 26!'
-          end
-        else
-            raise 'First param must be String, second param must be Integer!'
-        end
-      end
-
-      def shift(offset)
-        caesar_first_part = ORIGINAL[offset..ORIGINAL.length-1]
-        caesar_second_part = ORIGINAL[0..offset-1]
-        caesar_first_part.to_s + caesar_second_part.to_s
-      end
-
+      end.join('')
     end
+    
+    def decrypt(cipher_string)
+      raise(ArgumentError.new("Argument must be string.")) unless cipher_string.is_a? String
+      cipher_string.chars.map do |char|
+        if DOWNCASE.include?(char)
+          index = DOWNCASE.find_index(char)
+          shifted_index = (index - SHIFT) % DOWNCASE.length
+          DOWNCASE[shifted_index]
+        elsif UPCASE.include?(char)
+          index = UPCASE.find_index(char)
+          shifted_index = (index - SHIFT) % UPCASE.length
+          UPCASE[shifted_index]
+        else
+          char
+        end
+      end.join('')
+    end
+
   end
+end
   

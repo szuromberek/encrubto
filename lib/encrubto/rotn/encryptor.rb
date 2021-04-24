@@ -4,6 +4,11 @@ module Encrubto::RotN
     DOWNCASE = [*'a'..'z']
     UPCASE = [*'A'..'Z']
 
+    # Encrypts text using RotN encryption.
+    #
+    # @param plain_string [String] the text to encrypt
+    # @param shift [Integer] (3) the offset to use for encryption
+    # @return [String] the encrypted text
     def encrypt(plain_string, shift=3)
       check_arguments(plain_string, shift)
       plain_string.chars.map do |char|
@@ -21,6 +26,11 @@ module Encrubto::RotN
       end.join('')
     end
     
+    # Decrypts text using RotN encryption.
+    #
+    # @param cipher_string [String] the text to decrypt
+    # @param shift [Integer] (3) the offset to use for decryption
+    # @return [String] the decrypted text
     def decrypt(cipher_string, shift=3)
       check_arguments(cipher_string, shift)
       cipher_string.chars.map do |char|

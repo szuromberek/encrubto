@@ -59,4 +59,5 @@ RSpec.describe Encrubto::RotN do
       expect { Encrubto::RotN.decrypt("A", "B") }.to raise_exception(ArgumentError)
     end
   end
+  
 end

@@ -1,19 +1,17 @@
+require_relative '../rotn/encryptor'
 
 module Encrubto::Rot13
-  class Encryptor 
-  
-    ORI = 'abcdefghijklmnopqrstuvwxyz'
-    ROT = 'nopqrstuvwxyzabcdefghijklm'
-    def encrypt(str)
-      if str.is_a? String
-        str.tr("#{ ORI }#{ ORI.upcase }", "#{ ROT }#{ ROT.upcase }")
-      else
-        raise 'Param must be String!'
-      end
-    end
+  class Encryptor < Encrubto::RotN::Encryptor
 
-    def decrypt(encrypted)
-      encrypt(encrypted)
+    SHIFT = 13
+    
+    def encrypt(plain_string)
+      super(plain_string, SHIFT)
     end
+    
+    def decrypt(cipher_string)
+      super(cipher_string, SHIFT)
+    end
+    
   end
 end

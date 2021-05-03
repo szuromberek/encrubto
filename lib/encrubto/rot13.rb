@@ -1,15 +1,13 @@
-
 require 'encrubto/rot13/encryptor'
 
 module Encrubto::Rot13
-  
-  def self.encrypt(str)
+  def self.encrypt(plain_string)
     rot13 = Encrubto::Rot13::Encryptor.new
-    rot13.encrypt(str)
+    rot13.encrypt(plain_string)
   end
 
-  def self.decrypt(encrypted)
+  def self.decrypt(cipher_string)
     rot13 = Encrubto::Rot13::Encryptor.new
-    rot13.decrypt(encrypted)
+    rot13.decrypt(cipher_string)
   end
 end

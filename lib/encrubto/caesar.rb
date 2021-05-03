@@ -1,15 +1,13 @@
-
 require 'encrubto/caesar/encryptor'
 
 module Encrubto::Caesar
-  
-  def self.encrypt(str, offset)
+  def self.encrypt(plain_string)
     caesar = Encrubto::Caesar::Encryptor.new
-    caesar.encrypt(str, offset)
+    caesar.encrypt(plain_string)
   end
 
-  def self.decrypt(encrypted, offset)
+  def self.decrypt(cipher_string)
     caesar = Encrubto::Caesar::Encryptor.new
-    caesar.decrypt(encrypted, offset)
+    caesar.decrypt(cipher_string)
   end
 end
